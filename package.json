@@ -1,0 +1,17 @@
+{
+  "name": "dev-standup-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "groq-sdk": "^1.2.1",
+    "langfuse": "^3.38.20"
+  }
+}
