@@ -12,25 +12,25 @@ const langfuse = new Langfuse({
 async function standupBot(devInput) {
   // Create a trace in LangFuse
   const trace = langfuse.trace({
-    name: "dev-standup",
+    name: "bot prompt",
     input: devInput,
   });
 
-  const prompt = await langfuse.getPrompt("standup-prompt");
+  const prompt = await langfuse.getPrompt("bot prompt");
   const compiledPrompt = prompt.compile({ input: devInput });
 
   const generation = trace.generation({
     name: "standup-response",
     input: devInput,
-    model: "llama3-8b-8192",
+    model: "llama-3.3-70b-versatile",
   });
 
   const response = await groq.chat.completions.create({
-    model: "llama3-8b-8192",
+    model: "llama-3.3-70b-versatile",
     messages: compiledPrompt,
-  });t
+  });
 
-  const result = response.choices[0].message.conten;
+  const result = response.choices[0].message.content;
 
   generation.end({ output: result });
   trace.update({ output: result });
@@ -40,6 +40,6 @@ async function standupBot(devInput) {
 }
 
 // Test it
-standupBot("I've been stuck on this API integration for 2 days and I don't know what's wrong")
+standupBot("I just finished the authentication module and feeling good about today")
   .then(res => console.log("Bot response:\n", res))
   .catch(err => console.error(err));
